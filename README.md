@@ -1,22 +1,18 @@
 # Chess Tournament Site
 
 A Vite + React website for displaying chess tournament standings and pairings.
-Deployed automatically to GitHub Pages on every push to `main`.
 
 ## How it works
 
 | Step | What happens |
 |------|--------------|
 | 1 | Tournament organizer uploads a `.pgn` file to `public/pgn/` |
-| 2 | A push to `main` triggers the GitHub Actions workflow |
-| 3 | The build script generates `public/pgn/manifest.json` from all PGN files |
-| 4 | Vite builds the site; GitHub Pages deploys it |
-| 5 | Visitors see updated standings and pairings automatically |
+| 2 | The build script generates `public/pgn/manifest.json` from all PGN files |
+| 3 | Vite builds the site; GitHub Pages deploys it |
 
 ## PGN file conventions
 
 - Place files in `public/pgn/` (e.g. `round1.pgn`, `round2.pgn`)
-- Files are sorted alphabetically — name them so alphabetical order matches round order
 - One or more games per file; each game is a standard PGN game block
 - **Bye** — set the opponent's name to `BYE` (case-insensitive)
 - **Forfeit** — add `[Termination "Forfeit"]` to the game headers
@@ -39,44 +35,17 @@ Adjusted results are marked with `*` on the card.
 
 ```bash
 npm install
-npm run dev     # starts Vite dev server at http://localhost:5173
+npm run dev 
 ```
 
 ```bash
-npm run build   # production build → dist/
-npm run preview # preview the production build locally
-```
-
-## Project structure
-
-```
-public/
-  pgn/
-    manifest.json   ← auto-generated; do not edit manually
-    round1.pgn      ← upload PGN files here
-    round2.pgn
-src/
-  components/
-    GameCard.jsx    ← single game card with edit support
-    Rounds.jsx      ← round selector + game grid
-    Standings.jsx   ← points table
-  hooks/
-    useTournamentData.js  ← fetches and parses PGN data
-  utils/
-    pgnParser.js    ← PGN parsing + standings calculation
-  App.jsx
-scripts/
-  generate-manifest.js  ← prebuild script; auto-discovers PGN files
-.github/workflows/deploy.yml  ← GitHub Actions CI/CD
+npm run build
+npm run preview
 ```
 
 ---
 
 ## What we built and how to test it
-
-Here's a walkthrough of everything the site does and how you can verify it's all working. You don't need to deploy anything — just run it locally.
-
-### Getting it running
 
 ```bash
 npm install
@@ -91,7 +60,7 @@ Go to **http://localhost:5173**. You'll land on the Standings tab with sample da
 
 The standings table is the first thing people see. It ranks every player by their total points — wins are worth 1, draws 0.5, byes 1, losses 0. Click the **Standings** tab and you should see all six sample players listed in order with their points, wins, draws, and losses. The top three get a gold, silver, and bronze badge.
 
-To test that standings actually update, jump ahead to the TD adjustments section, change a result, and come back here — you'll see the numbers change in real time.
+To test that standings actually update, jump ahead to the TD adjustments section, change a result.
 
 ---
 
@@ -105,7 +74,7 @@ A few things to look for:
 
 ---
 
-### TD result adjustments
+### Result adjustments
 
 This is the tournament director's tool for correcting mistakes or entering results that aren't in the PGN yet.
 
@@ -133,7 +102,7 @@ That's exactly how it works in production too — organizers push the file to Gi
 
 ---
 
-### Customising the look
+### Customising tournament
 
 Open `tournament.config.js`. While the dev server is running, try these changes and watch the browser update instantly:
 
@@ -142,15 +111,3 @@ Open `tournament.config.js`. While the dev server is running, try these changes 
 - Set `logo: '/logo.png'` — the chess piece icon in the header is replaced by your logo (the ACF logo is already in `public/`).
 - Add a sponsor: `sponsors: [{ name: 'ACME', logo: '/logo.png' }]` — a sponsor row appears in the footer.
 
----
-
-### Testing the production build
-
-When you're done, run:
-
-```bash
-npm run build
-npm run preview
-```
-
-Open **http://localhost:4173**. This is the exact bundle that GitHub Actions deploys to GitHub Pages — same behavior, no dev tooling. If it works here, it'll work live.
