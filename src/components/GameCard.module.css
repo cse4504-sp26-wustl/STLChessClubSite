@@ -1,0 +1,153 @@
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px 16px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  transition: border-color 0.2s;
+}
+
+.card:hover {
+  border-color: var(--accent-gold);
+}
+
+.cardOverridden {
+  border-color: #d69e2e;
+  border-style: dashed;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.colorDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.playerName {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.elo {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.resultRow {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.badgeWhiteWin { background: #276749; color: #c6f6d5; }
+.badgeBlackWin  { background: #276749; color: #c6f6d5; }
+.badgeDraw      { background: #975a16; color: #fefcbf; }
+.badgeBye       { background: #2d3748; color: #a0aec0; }
+.badgeForfeit   { background: #822727; color: #fed7d7; }
+.badgePending   { background: #2d3748; color: #718096; border: 1px dashed #4a5568; }
+
+.overrideMark {
+  color: var(--accent-gold);
+}
+
+.editBtn {
+  align-self: flex-end;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  transition: all 0.15s;
+  margin-top: 2px;
+}
+
+.editBtn:hover {
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+}
+
+.editArea {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.select {
+  width: 100%;
+  background: #1a2a4a;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 5px 8px;
+  font-size: 0.82rem;
+}
+
+.editButtons {
+  display: flex;
+  gap: 6px;
+}
+
+.saveBtn, .resetBtn, .cancelBtn {
+  flex: 1;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.saveBtn {
+  background: var(--accent-gold);
+  color: #1a1a2e;
+}
+
+.saveBtn:hover {
+  background: var(--accent-gold-hover);
+}
+
+.resetBtn {
+  background: transparent;
+  color: #fc8181;
+  border: 1px solid #fc8181;
+}
+
+.resetBtn:hover {
+  background: #822727;
+}
+
+.cancelBtn {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.cancelBtn:hover {
+  color: var(--text-primary);
+}
