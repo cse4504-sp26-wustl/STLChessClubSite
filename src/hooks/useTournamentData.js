@@ -39,7 +39,6 @@ export function useTournamentData() {
           rounds.push({ ...roundInfo, gameCount: games.length })
         }
 
-        // Derive event name from the first game that has one
         const eventName = allGames.find(g => g.event)?.event ?? 'Chess Tournament'
 
         if (!cancelled) {
@@ -53,7 +52,8 @@ export function useTournamentData() {
     }
 
     load()
-    return () => { cancelled = true }
+    const interval = setInterval(load, 30_000)
+    return () => { cancelled = true; clearInterval(interval) }
   }, [])
 
   return state
