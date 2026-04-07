@@ -7,6 +7,10 @@
 [Result "0-1"]
 [WhiteElo "1720"]
 [BlackElo "1680"]
+[Board "1"]
+[WhiteUSCF "23456789"]
+[BlackUSCF "34567890"]
+[Termination "normal"]
 
 1. e4 d5 2. exd5 Qxd5 3. Nc3 Qa5 4. d4 Nf6 5. Nf3 Bg4 6. Be2 e6 0-1
 
@@ -19,6 +23,10 @@
 [Result "1-0"]
 [WhiteElo "1750"]
 [BlackElo "1850"]
+[Board "2"]
+[WhiteUSCF "45678901"]
+[BlackUSCF "12345678"]
+[Termination "normal"]
 
 1. d4 Nf6 2. c4 e6 3. Nc3 Bb4 4. e3 O-O 5. Bd3 d5 6. Nf3 c5 1-0
 
@@ -31,6 +39,10 @@
 [Result "*"]
 [WhiteElo "1810"]
 [BlackElo "1600"]
+[Board "3"]
+[WhiteUSCF "78901234"]
+[BlackUSCF "56789012"]
+[Termination "in-progress"]
 
 1. Nf3 d5 2. g3 Nf6 3. Bg2 e6 4. O-O Be7 *
 
@@ -42,5 +54,8 @@
 [Black "BYE"]
 [Result "1-0"]
 [WhiteElo "1780"]
+[WhiteUSCF "67890123"]
+[Board "4"]
+[Termination "bye"]
 
 1-0

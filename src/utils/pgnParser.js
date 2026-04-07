@@ -31,13 +31,17 @@ function normalizeResult(headers) {
   const white = (headers.White || '').trim()
   const black = (headers.Black || '').trim()
   const result = headers.Result || '*'
-  const termination = (headers.Termination || '').toLowerCase()
+  const termination = (headers.Termination || '').toLowerCase().trim()
 
-  if (/^bye$/i.test(white) || /^bye$/i.test(black)) {
+  if (termination === 'bye' || /^bye$/i.test(white) || /^bye$/i.test(black)) {
     return 'bye'
   }
 
-  const isForfeit = termination.includes('forfeit')
+  if (termination === 'in-progress' || termination === 'not-started') {
+    return 'pending'
+  }
+
+  const isForfeit = termination === 'forfeit'
 
   if (result === '1-0') return isForfeit ? 'forfeit-white-win' : 'white-win'
   if (result === '0-1') return isForfeit ? 'forfeit-black-win' : 'black-win'
@@ -79,11 +83,17 @@ export function parsePGNFile(text, filename = '') {
       black,
       whiteElo: headers.WhiteElo || '',
       blackElo: headers.BlackElo || '',
+      whiteUSCF: headers.WhiteUSCF || '',
+      blackUSCF: headers.BlackUSCF || '',
+      whiteUUID: headers.WhiteUUID || '',
+      blackUUID: headers.BlackUUID || '',
+      board: headers.Board || '',
       result: normalizeResult(headers),
       rawResult: headers.Result || '*',
       round,
       event: headers.Event || '',
       date: headers.Date || '',
+      site: headers.Site || '',
       roundFile: filename,
     })
   }
@@ -110,9 +120,9 @@ export function computeStandings(games, adjustments = {}) {
   for (const game of games) {
     const result = adjustments[game.id] ?? game.result
     const { white, black } = game
-    const isByeGame = /^bye$/i.test(white) || /^bye$/i.test(black)
+    const isByeGame = result === 'bye' || /^bye$/i.test(white) || /^bye$/i.test(black)
     const realPlayer = isByeGame
-      ? (/^bye$/i.test(white) ? black : white)
+      ? (/^bye$/i.test(white) ? black : /^bye$/i.test(black) ? white : (game.rawResult === '1-0' ? white : black))
       : null
 
     if (isByeGame) {

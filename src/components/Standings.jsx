@@ -1,12 +1,18 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { computeStandings } from '../utils/pgnParser'
 import styles from './Standings.module.css'
 
 export default function Standings({ games, adjustments }) {
+  const [query, setQuery] = useState('')
+
   const standings = useMemo(
     () => computeStandings(games, adjustments),
     [games, adjustments]
   )
+
+  const filtered = query.trim()
+    ? standings.filter(row => row.name.toLowerCase().includes(query.toLowerCase()))
+    : standings
 
   if (standings.length === 0) {
     return (
@@ -17,38 +23,52 @@ export default function Standings({ games, adjustments }) {
   }
 
   return (
-    <div className={styles.wrapper}>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th className={styles.rankCol}>#</th>
-            <th>Player</th>
-            <th className={styles.numCol} title="Total points">Pts</th>
-            <th className={styles.numCol} title="Wins">W</th>
-            <th className={styles.numCol} title="Draws">D</th>
-            <th className={styles.numCol} title="Losses">L</th>
-            <th className={styles.numCol} title="Byes">B</th>
-          </tr>
-        </thead>
-        <tbody>
-          {standings.map((row, i) => (
-            <tr key={row.name} className={i % 2 === 0 ? styles.rowEven : styles.rowOdd}>
-              <td className={styles.rankCol}>
-                {row.rank <= 3
-                  ? <span className={`${styles.medal} ${styles[`medal${row.rank}`]}`}>{row.rank}</span>
-                  : row.rank
-                }
-              </td>
-              <td className={styles.playerCell}>{row.name}</td>
-              <td className={`${styles.numCol} ${styles.points}`}>{formatPoints(row.points)}</td>
-              <td className={styles.numCol}>{row.wins}</td>
-              <td className={styles.numCol}>{row.draws}</td>
-              <td className={styles.numCol}>{row.losses}</td>
-              <td className={styles.numCol}>{row.byes || '—'}</td>
+    <div>
+      <div className={styles.searchRow}>
+        <input
+          className={styles.search}
+          type="search"
+          placeholder="Search players…"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+        />
+      </div>
+      <div className={styles.wrapper}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th className={styles.rankCol}>#</th>
+              <th>Player</th>
+              <th className={styles.numCol} title="Total points">Pts</th>
+              <th className={styles.numCol} title="Wins">W</th>
+              <th className={styles.numCol} title="Draws">D</th>
+              <th className={styles.numCol} title="Losses">L</th>
+              <th className={styles.numCol} title="Byes">B</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {filtered.length === 0
+              ? <tr><td colSpan={7} className={styles.noResults}>No players match "{query}"</td></tr>
+              : filtered.map((row, i) => (
+                <tr key={row.name} className={i % 2 === 0 ? styles.rowEven : styles.rowOdd}>
+                  <td className={styles.rankCol}>
+                    {row.rank <= 3
+                      ? <span className={`${styles.medal} ${styles[`medal${row.rank}`]}`}>{row.rank}</span>
+                      : row.rank
+                    }
+                  </td>
+                  <td className={styles.playerCell}>{row.name}</td>
+                  <td className={`${styles.numCol} ${styles.points}`}>{formatPoints(row.points)}</td>
+                  <td className={styles.numCol}>{row.wins}</td>
+                  <td className={styles.numCol}>{row.draws}</td>
+                  <td className={styles.numCol}>{row.losses}</td>
+                  <td className={styles.numCol}>{row.byes || '—'}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

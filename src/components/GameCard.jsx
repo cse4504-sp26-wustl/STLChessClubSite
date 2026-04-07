@@ -45,16 +45,18 @@ export default function GameCard({ game, adjustedResult, onAdjustmentChange }) {
     setEditing(false)
   }
 
-  const isBye = /^bye$/i.test(game.white) || /^bye$/i.test(game.black)
   const whiteDisplay = /^bye$/i.test(game.white) ? '— BYE —' : game.white
   const blackDisplay = /^bye$/i.test(game.black) ? '— BYE —' : game.black
 
   return (
     <div className={`${styles.card} ${isOverridden ? styles.cardOverridden : ''}`}>
+      {game.board && <div className={styles.boardLabel}>Board {game.board}</div>}
+
       <div className={styles.player}>
         <span className={styles.colorDot} style={{ background: '#f0f0f0', border: '1px solid #999' }} />
         <span className={styles.playerName}>{whiteDisplay}</span>
         {game.whiteElo && <span className={styles.elo}>{game.whiteElo}</span>}
+        {game.whiteUSCF && <span className={styles.uscf}>USCF {game.whiteUSCF}</span>}
       </div>
 
       <div className={styles.resultRow}>
@@ -68,6 +70,7 @@ export default function GameCard({ game, adjustedResult, onAdjustmentChange }) {
         <span className={styles.colorDot} style={{ background: '#333', border: '1px solid #666' }} />
         <span className={styles.playerName}>{blackDisplay}</span>
         {game.blackElo && <span className={styles.elo}>{game.blackElo}</span>}
+        {game.blackUSCF && <span className={styles.uscf}>USCF {game.blackUSCF}</span>}
       </div>
 
       {!editing ? (

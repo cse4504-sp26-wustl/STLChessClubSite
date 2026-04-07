@@ -41,6 +41,9 @@ export default {
   //
   // Each entry:  { name: 'Display name', logo: '/sponsors/acme.png', url: 'https://acme.com' }
   // url is optional — omit it if you don't want a clickable link.
-  sponsors: [],
+  sponsors: [
+    { name: 'Red Bull', logo: '/sponsors/Red-Bull-Logo.png' },
+    { name: 'Claude',   logo: '/sponsors/claude.png' },
+  ],
 
 }

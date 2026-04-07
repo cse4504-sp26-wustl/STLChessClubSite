@@ -49,6 +49,21 @@
   flex-shrink: 0;
 }
 
+.uscf {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.boardLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
 .resultRow {
   display: flex;
   justify-content: center;
