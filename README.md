@@ -74,31 +74,14 @@ A few things to look for:
 
 ---
 
-### Result adjustments
-
-This is the tournament director's tool for correcting mistakes or entering results that aren't in the PGN yet.
-
-1. Go to **Rounds** and pick any round.
-2. Click **Edit** on any game card.
-3. Use the dropdown to pick a different result — try changing a win to a Draw.
-4. Hit **Save**.
-5. Now go back to **Standings**. Alice's or Bob's points (whoever was in that game) will have changed.
-6. Go back to **Rounds**, hit **Edit** on that same card, and click **Reset** to put it back the way it was.
-
-Adjusted results are marked with a `*` so it's obvious something was manually changed. These adjustments live in your browser and survive page refreshes, so the TD can close and reopen the tab without losing their work.
-
----
-
 ### Adding a new round
 
 This simulates what happens when a tournament organizer uploads the next round's PGN file.
 
-1. Stop the dev server if it's running.
+1. Stop the dev server if it's running (once integrated with github pages this will not be necessary).
 2. Add a new file — say `public/pgn/round4.pgn` — with at least one game in standard PGN format. Use the existing round files as a reference.
 3. Run `npm run dev` again.
-4. A **Round 4** tab will appear automatically. No code changes, no config edits.
-
-That's exactly how it works in production too — organizers push the file to GitHub and the site redeploys with the new round showing up on its own.
+4. A **Round 4** tab will appear automatically.
 
 ---
 
@@ -108,6 +91,6 @@ Open `tournament.config.js`. While the dev server is running, try these changes 
 
 - Set `name: 'My Tournament'` — the header title changes.
 - Change `accent` to `'#cc2936'` — all the gold highlights turn red.
-- Set `logo: '/logo.png'` — the chess piece icon in the header is replaced by your logo (the ACF logo is already in `public/`).
-- Add a sponsor: `sponsors: [{ name: 'ACME', logo: '/logo.png' }]` — a sponsor row appears in the footer.
+- Set `logo: '/logo.png'` — the logo in the header is replaced by your logo (the ACF logo is already in `public/`).
+- Add a sponsor: `sponsors: [{ name: 'ACME', logo: '/logo.png' }]` (there is currently two sponsors)
 
