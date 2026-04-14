@@ -1,5 +1,5 @@
 # Chess Tournament Site
-
+ 
 A Vite + React website for displaying chess tournament standings and pairings.
 
 ## How it works
