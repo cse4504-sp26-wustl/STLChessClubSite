@@ -1,6 +1,12 @@
 import { useMemo, useState } from 'react'
 import { computeStandings } from '../utils/pgnParser'
+import { standingsToCSV, downloadCSV } from '../utils/csvExport'
 import styles from './Standings.module.css'
+
+function handleDownload(standings) {
+  const date = new Date().toISOString().slice(0, 10)
+  downloadCSV(standingsToCSV(standings), `standings-${date}.csv`)
+}
 
 export default function Standings({ games }) {
   const [query, setQuery] = useState('')
@@ -32,6 +38,13 @@ export default function Standings({ games }) {
           value={query}
           onChange={e => setQuery(e.target.value)}
         />
+        <button
+          className={styles.downloadBtn}
+          onClick={() => handleDownload(standings)}
+          title="Download standings as CSV"
+        >
+          ⬇ Download CSV
+        </button>
       </div>
       <div className={styles.wrapper}>
         <table className={styles.table}>
