@@ -3,11 +3,36 @@ import { computeStandings } from '../utils/pgnParser'
 import { standingsToCSV, downloadCSV } from '../utils/csvExport'
 import styles from './Standings.module.css'
 
-function handleDownload(standings) {
-  const date = new Date().toISOString().slice(0, 10)
-  downloadCSV(standingsToCSV(standings), `standings-${date}.csv`)
+/**
+ * Returns today's date as a YYYY-MM-DD string using the local system timezone.
+ *
+ * @returns {string} Local date string in YYYY-MM-DD format.
+ */
+function localDateString() {
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
 }
 
+/**
+ * Triggers a CSV download of the provided standings rows.
+ * Does nothing if the standings array is empty.
+ *
+ * @param {Array<object>} standings - Standings rows from `computeStandings`.
+ */
+function handleDownload(standings) {
+  if (!standings || standings.length === 0) return
+  downloadCSV(standingsToCSV(standings), `standings-${localDateString()}.csv`)
+}
+
+/**
+ * Displays tournament standings as a sortable, searchable table with a CSV download button.
+ *
+ * @param {object} props
+ * @param {Array<object>} props.games - Parsed game objects used to compute standings.
+ */
 export default function Standings({ games }) {
   const [query, setQuery] = useState('')
 
@@ -86,6 +111,13 @@ export default function Standings({ games }) {
   )
 }
 
+/**
+ * Formats a points value for display: whole numbers are shown without a decimal,
+ * fractional values are shown with one decimal place.
+ *
+ * @param {number} pts - The points value.
+ * @returns {string} Formatted string.
+ */
 function formatPoints(pts) {
   // Show as integer if whole number, otherwise show one decimal
   return pts % 1 === 0 ? pts.toString() : pts.toFixed(1)
