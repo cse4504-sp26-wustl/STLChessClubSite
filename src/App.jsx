@@ -5,6 +5,8 @@ import Standings from './components/Standings'
 import Rounds from './components/Rounds'
 import styles from './App.module.css'
 
+const BASE = import.meta.env.BASE_URL
+
 export default function App() {
   const { rounds, games, eventName, loading, error } = useTournamentData()
   const [activeTab, setActiveTab] = useState('standings')
@@ -15,7 +17,7 @@ export default function App() {
         <div className={styles.headerInner}>
           <div className={styles.brand}>
             {config.logo
-              ? <img src={config.logo} alt="Logo" className={styles.logoImg} />
+              ? <img src={`${BASE}${config.logo}`} alt="Logo" className={styles.logoImg} />
               : <span className={styles.logo}>&#9822;</span>
             }
             <h1 className={styles.title}>
@@ -67,9 +69,9 @@ export default function App() {
             {config.sponsors.map(s =>
               s.url
                 ? <a key={s.name} href={s.url} target="_blank" rel="noopener noreferrer">
-                    <img src={s.logo} alt={s.name} className={styles.sponsorLogo} />
+                    <img src={`${BASE}${s.logo}`} alt={s.name} className={styles.sponsorLogo} />
                   </a>
-                : <img key={s.name} src={s.logo} alt={s.name} className={styles.sponsorLogo} />
+                : <img key={s.name} src={`${BASE}${s.logo}`} alt={s.name} className={styles.sponsorLogo} />
             )}
           </div>
         )}

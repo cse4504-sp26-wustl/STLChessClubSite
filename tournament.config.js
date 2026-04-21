@@ -31,19 +31,19 @@ export default {
 
   // ── Logo ─────────────────────────────────────────────────────────────────
   // Path to a logo image, relative to the public/ folder.
-  // Place your file in public/ and set the path here, e.g. '/logo.png'.
+  // Place your file in public/ and set the path here, e.g. 'logo.png'.
   // Set to null to show the default chess-piece icon instead.
-  logo: '/logo.png',
+  logo: 'logo.png',
 
   // ── Sponsors ─────────────────────────────────────────────────────────────
   // List of sponsor logos shown in the footer.
   // Place image files in public/sponsors/ and list them here.
   //
-  // Each entry:  { name: 'Display name', logo: '/sponsors/acme.png', url: 'https://acme.com' }
+  // Each entry:  { name: 'Display name', logo: 'sponsors/acme.png', url: 'https://acme.com' }
   // url is optional — omit it if you don't want a clickable link.
   sponsors: [
-    { name: 'Red Bull', logo: '/sponsors/Red-Bull-Logo.png' },
-    { name: 'Claude',   logo: '/sponsors/claude.png' },
+    { name: 'Red Bull', logo: 'sponsors/Red-Bull-Logo.png' },
+    { name: 'Claude',   logo: 'sponsors/claude.png' },
   ],
 
 }
