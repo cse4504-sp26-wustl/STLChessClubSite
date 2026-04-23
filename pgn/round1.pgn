@@ -50,12 +50,12 @@
 [Round "1"]
 [White "Dave Wilson"]
 [Black "Eve Martinez"]
-[Result "*"]
+[Result "1-0"]
 [WhiteElo "1750"]
 [BlackElo "1600"]
 [Board "4"]
 [WhiteUSCF "45678901"]
 [BlackUSCF "56789012"]
-[Termination "in-progress"]
+[Termination "normal"]
 
-1. Nf3 d5 2. g3 c6 3. Bg2 Bg4 4. O-O Nd7 5. d3 e5 6. Nbd2 Ngf6 *
+1. Nf3 d5 2. g3 c6 3. Bg2 Bg4 4. O-O Nd7 5. d3 e5 6. Nbd2 Ngf6 7. e4 Be7 8. Re1 O-O 1-0
