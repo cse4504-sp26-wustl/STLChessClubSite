@@ -1,14 +1,7 @@
 import { useState, useEffect } from 'react'
 import { parsePGNFile } from '../utils/pgnParser'
+import { config } from '../applyTheme.js'
 
-const BASE = import.meta.env.BASE_URL
-
-/**
- * Fetches the PGN manifest and all PGN files, returning parsed game data.
- *
- * The manifest lives at <base>/pgn/manifest.json and lists available rounds.
- * Each PGN file is fetched from <base>/pgn/<filename>.
- */
 export function useTournamentData() {
   const [state, setState] = useState({
     rounds: [],
@@ -23,7 +16,8 @@ export function useTournamentData() {
 
     async function load() {
       try {
-        const res = await fetch(`${BASE}pgn/manifest.json`)
+        const t = Date.now()
+        const res = await fetch(`${config.dataUrl}/pgn/manifest.json?t=${t}`)
         if (!res.ok) throw new Error(`Could not load manifest (HTTP ${res.status})`)
         const manifest = await res.json()
 
@@ -31,7 +25,7 @@ export function useTournamentData() {
         const rounds = []
 
         for (const roundInfo of manifest.rounds ?? []) {
-          const pgnRes = await fetch(`${BASE}pgn/${roundInfo.filename}`)
+          const pgnRes = await fetch(`${config.dataUrl}/pgn/${roundInfo.filename}?t=${t}`)
           if (!pgnRes.ok) continue
           const pgnText = await pgnRes.text()
           const games = parsePGNFile(pgnText, roundInfo.filename)

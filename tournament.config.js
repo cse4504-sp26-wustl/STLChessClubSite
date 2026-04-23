@@ -35,6 +35,11 @@ export default {
   // Set to null to show the default chess-piece icon instead.
   logo: 'logo.png',
 
+  // ── Data branch URL ──────────────────────────────────────────────────────
+  // Raw GitHub URL of the branch where PGN files are stored.
+  // Update this if you fork the repo into a different org or repo name.
+  dataUrl: 'https://raw.githubusercontent.com/cse4504-sp26-wustl/STLChessClubSite/data',
+
   // ── Sponsors ─────────────────────────────────────────────────────────────
   // List of sponsor logos shown in the footer.
   // Place image files in public/sponsors/ and list them here.
