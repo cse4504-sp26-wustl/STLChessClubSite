@@ -1,10 +1,6 @@
 {
   "rounds": [
     {
-      "filename": "Round5.pgn",
-      "label": "Round 5"
-    },
-    {
       "filename": "round1.pgn",
       "label": "Round 1"
     },
@@ -19,6 +15,10 @@
     {
       "filename": "round4.pgn",
       "label": "Round 4"
+    },
+    {
+      "filename": "round5.pgn",
+      "label": "Round 5"
     }
   ]
 }
